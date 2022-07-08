@@ -1,4 +1,4 @@
 import ReactDom from "react-dom";
-import App from "./Components/App";
+import App from "./App.js";
 
 ReactDom.render(App(), document.querySelector(".root"));
