@@ -1,9 +1,25 @@
-import { Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import { useState } from 'react';
+import axios from 'axios';
 
+export default function Login() {
 
-export default function SignUp() {
-   
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const body = { email, password };
+        try {
+          const { data } = await axios.post('https://localhost:4000/login', body);
+
+          navigator('/stock');
+        } catch (error) {
+          console.error('Deu erro ao fazer o login');
+        }
+      }
+
     return (
         <MainStyle>
         <>
@@ -11,16 +27,18 @@ export default function SignUp() {
        
         <form>
             <input
-                type="email"
+                type="text"
+                onChange={e => setEmail(e.target.value)}
                 placeholder="Email"
                 required
             />
             <input
                 type="password"
+                onChange={e => setPassword(e.target.value)}
                 placeholder="Senha"
                 required
             />
-            <button type="submit">Entrar</button>
+            <button type="submit" onClick={handleSubmit}> Entrar </button>
         </form>
         <Link to="/signup">Não tem uma conta? Cadastre-se agora!</Link>
         </>        
@@ -62,7 +80,7 @@ input{
     border-radius: 30px;
     border: none;
     background-color: #FFFFFF;
-    color:#E5E5E5;
+    color:#000000;
     font-size: 16px;
     margin-bottom: 13px;
 }
