@@ -1,20 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
+import UserContext from '../../contexts/UserContext';
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const { setUser } = useContext(UserContext);
+    const navigator = useNavigate();
+
+
     async function handleSubmit(e) {
         e.preventDefault();
         const body = { email, password };
         try {
-          const { data } = await axios.post('https://localhost:4000/login', body);
+          const { data } = await axios.post('http://localhost:4000/login', body);
 
-          navigator('/stock');
+
+          setUser(data);
+          navigator('/rotaAux');
         } catch (error) {
           console.error('Deu erro ao fazer o login');
         }

@@ -16,7 +16,7 @@ export default function SignUp() {
         e.preventDefault();
         const body = { name, email, password, confirmPassword };
         try {
-        await axios.post('https://localhost:4000/sign-up', body);
+        await axios.post('http://localhost:4000/sign-up', body);
 
         navigator('/');
         } catch (error) {
