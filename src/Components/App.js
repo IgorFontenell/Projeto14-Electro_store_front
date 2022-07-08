@@ -5,13 +5,13 @@ import MainPage from "./MainPage/MainPage";
 
 export default function App() {
     return(
-        // <BrowserRouter>
+        <BrowserRouter>
 			
-		// 	<Routes>
+		 	<Routes>
 				
-		// 		<Route path="/" element={<MainPage />} />
-		// 	</Routes>
-		// </BrowserRouter>
-        <MainPage />
+		 		<Route path="/main" element={<MainPage />} />
+			</Routes>
+		 </BrowserRouter>
+        
     );
 }
