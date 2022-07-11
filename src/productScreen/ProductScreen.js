@@ -8,7 +8,7 @@ export default function ProductScreen() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const URL = "http://localhost:4000/xablau";
+        const URL = "http://localhost:4000/choosenProduct";
         const promise = axios.post(URL, { productId: productId });
 
         promise.then(response => {
@@ -48,15 +48,6 @@ export default function ProductScreen() {
                             <div className='product-price'> R$ {products.price}</div>
                             <div className='product-brand'>{products.brand}</div>
 
-                            <div className='seletor'>
-                                Quantidade: <select>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                            </div>
-
                             <div className='buttom-comprar'>
                                 <Link to={'/carrinho'}> Adicionar ao carrinho </Link>
                             </div>
@@ -72,11 +63,11 @@ export default function ProductScreen() {
 const Header = styled.div`
 width: 100%;
 background-color: #E5E5E5;
-padding-top: 15px; 
-padding-bottom: 15px; 
+padding: 15px 80px; 
 display: flex;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
+position: fixed;
 top: 0px;
 
 .marca{
@@ -87,10 +78,23 @@ top: 0px;
 }
 
 .voltar{
-    font-weight: 200;
+    font-weight: 400;
     font-size: 14px;
     line-height: 32px;
-    color: #010035;
+    width: 50px;
+    heigth: 20px;
+    background-color: #FF6E4E;
+    border-radius: 12px; 
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+    
+    a{
+        cursor: pointer;
+        text-decoration: none;
+        color: #FFFFFF;
+
+    }
 `;
 
 const Main = styled.div`
@@ -117,7 +121,7 @@ li{
 }
 
 .product-image{
-    margin-top: 50px;
+    margin-top: 100px;
     width: 350px;
     heigth: 500px;
 }

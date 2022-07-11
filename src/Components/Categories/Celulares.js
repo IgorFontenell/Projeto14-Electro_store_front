@@ -69,9 +69,9 @@ export default function Celulares(props) {
 const Header = styled.div`
 width: 100%;
 background-color: #E5E5E5;
-padding: 15px 15px; 
+padding: 15px 80px; 
 display: flex;
-justify-content: center;
+justify-content: space-between;
 align-items: center;
 position: fixed;
 top: 0px;
@@ -84,10 +84,25 @@ top: 0px;
 }
 
 .voltar{
-    font-weight: 200;
+    font-weight: 400;
     font-size: 14px;
     line-height: 32px;
-    color: #010035;
+    width: 50px;
+    heigth: 20px;
+    background-color: #FF6E4E;
+    border-radius: 12px; 
+    display:flex;
+    justify-content: center;
+    align-items: center; 
+    
+    a{
+        cursor: pointer;
+        text-decoration: none;
+        color: #FFFFFF;
+
+    }
+    
+
 `;
 
 const Main = styled.div`
