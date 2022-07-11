@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import BuyingItem from "./BuyingItem";
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Cart() {
-    
+    const navigate = useNavigate();
     const [ items, setItems ] = useState([]);
     const [ total, setTotal ] = useState(0);
 
@@ -30,12 +31,19 @@ useEffect( async () => {
     async function UpdateBuyingItems () {
         let request = await axios.get("http://localhost:4000/buy");
         setItems(request.data);
-        ;
+        
     }
 
    async function UpdateTotal () {
         let request = await axios.get("http://localhost:4000/buyingvalue");
         setTotal(request.data.price);
+    }
+
+    async function Checkout() {
+        let request =  axios.delete("http://localhost:4000/buy");
+        alert("Itens comprados com sucesso");
+        navigate("/main");
+        
     }
     return(
         <Page>
@@ -68,7 +76,7 @@ useEffect( async () => {
                         <span>Grátis</span>
                     </div>
                 </Total>
-                <CheckOut>
+                <CheckOut onClick={Checkout}>
                     <div>
                         <span>Checkout</span>
                     </div>
