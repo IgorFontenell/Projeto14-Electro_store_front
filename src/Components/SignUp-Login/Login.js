@@ -21,7 +21,7 @@ export default function Login() {
 
 
           setUser(data);
-          navigator('/rotaAux');
+          navigator('/main');
         } catch (error) {
           console.error('Deu erro ao fazer o login');
         }

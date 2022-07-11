@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 export default function Category({ ion, categoria }) {
-    const [ selected, setSelected ] = useState(false);
 
-    function Select(){
-        setSelected(!selected);
+    const navigator = useNavigate();
+
+    function navigate(){
+        navigator(`/${categoria}`);
     }
     
     return(
-        <Classe  selected={selected} onClick={Select}>
+        <Classe onClick={navigate}>
             <div>
                 <ion-icon name={ion}></ion-icon>
             </div>
@@ -28,20 +29,27 @@ const Classe = styled.div`
         width: 70px;
         height: 70px;
         border-radius: 50%;
-        background-color: ${props => props.selected ? "#FF6E4E" : "#FFFFFF"};
+        background-color:#FFFFFF;
         align-items: center;
         justify-content: center;
         box-shadow: 0px 0px 3px grey;
         margin-bottom: 5px;
         
     }
-    ion-icon {
+    ion-icon{
         font-size: 45px;
-        color: ${props => props.selected ? "#FFFFFF" : "#B3B3C3"};
+        color: #B3B3C3;
     }
     span {
         font-family: 'Mark Pro', sans-serif;
         font-size: 12px;
-        color: ${props => props.selected ? "#FF6E4E" : "#010035"};
+    }
+
+    ion-icon:hover{
+        cursor: pointer;
+    }
+    div:hover{
+        cursor: pointer;
+        background-color: #FF6E4E;
     }
 `;
