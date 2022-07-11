@@ -13,6 +13,7 @@ import Fones from "./Components/Categories/Fones.js";
 import Telescópio from "./Components/Categories/Telescópio.js";
 import SmartWatch from "./Components/Categories/SmartWatch.js";
 import Impressoras from "./Components/Categories/Impressoras.js";
+import ProductScreen from "./productScreen/ProductScreen.js";
 
 import UserContext from "./contexts/UserContext.js";
 
@@ -33,6 +34,7 @@ export default function App() {
                     <Route path="/Telescópio" element={<Telescópio />} />
                     <Route path="/SmartWatch" element={<SmartWatch />} />
                     <Route path="/Impressoras" element={<Impressoras />} />
+                    <Route path="/product/:productId" element={<ProductScreen />} />
 				    <Route path="/cart" element={<Cart />} />
                 </Routes>
             </BrowserRouter>

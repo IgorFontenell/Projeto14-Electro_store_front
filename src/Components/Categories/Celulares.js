@@ -10,8 +10,13 @@ export default function Celulares(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await axios.get("http://localhost:4000/categories-products");
-            setProducts(data);
+            const { data } = await axios.get("http://localhost:4000/categories-products-Celulares");
+
+            const product = products.filter(x => x.category === "Celulares");
+
+            if(product){
+                setProducts(data);  
+            }           
         }
         fetchData();
         return () => {
@@ -22,7 +27,12 @@ export default function Celulares(props) {
     return (
         <>
         <Header>
-            <h1> Electro Store </h1>
+            <div className='marca'>
+                <h1> Electro Store </h1>
+            </div>            
+            <div className='voltar'>
+                <Link to={'/main'}>Voltar</Link>
+            </div>          
         </Header>
 
         <Main>
@@ -42,10 +52,13 @@ export default function Celulares(props) {
 
                                 <div className='product-price'> R$ {product.price}</div>
                                 <div className='product-brand'>{product.brand}</div>
+
+                                <div className='buttom-comprar'>
+                                    <Link to={'/product/' + product._id}>Comprar</Link>
+                                </div>
                             </div>
                         </li>)
-                }
-
+               }
             </ul>
         </Main>
         </>
@@ -55,7 +68,7 @@ export default function Celulares(props) {
 
 const Header = styled.div`
 width: 100%;
-background-color: #FF6E4E;
+background-color: #E5E5E5;
 padding: 15px 15px; 
 display: flex;
 justify-content: center;
@@ -63,18 +76,24 @@ align-items: center;
 position: fixed;
 top: 0px;
 
-h1{
+.marca{
     font-weight: 700;
     font-size: 30px;
     line-height: 32px;
     color: #010035;
 }
+
+.voltar{
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 32px;
+    color: #010035;
 `;
 
 const Main = styled.div`
 
-background-color: #010035;
-height: 100vh;
+background-color: #FFFFFF;
+height: 100%;
 
     .products{
         display: flex;
@@ -82,7 +101,7 @@ height: 100vh;
         align-items: center;
         flex-wrap: wrap;
         padding: 5px 5px;
-        margin-top: 80px;
+        margin-top: 60px;
     }
 
     li{
@@ -94,10 +113,11 @@ height: 100vh;
 
         .product {
             width: 250px;
-            height: 355px;
-            box-shadow: 0px 0px 40px rgba(170, 182, 211, 0.1);
+            height: 430px;
+            box-shadow: 0px 0px 40px rgba(170, 182, 211, 0.4);
             border-radius: 10px;
             background-color: #FFFFFF;
+            
         }
 
         .product-image{
@@ -117,6 +137,11 @@ height: 100vh;
             padding: 5px 15px;
             text-decoration: none;
             cursor: pointer;
+
+            a {
+                color: #000000;
+                text-decoration: none;
+              }
         }
 
         .product-price{
@@ -128,11 +153,31 @@ height: 100vh;
         }
 
         .product-brand{
-            font-weight: 400;
+            font-weight: 500;
             font-size: 14px;
             line-height: 20px;
             color: #000000;
             padding: 0px 15px;
         }
+
+        .buttom-comprar{
+            background-color: #FF6E4E;
+            width: 180px;
+            height: 48px;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin: 12px 30px;          
+            cursor: pointer;
+
+            a {
+                color: #ffffff;
+                text-decoration: none;
+              }
+        }
+        
     
     `;
