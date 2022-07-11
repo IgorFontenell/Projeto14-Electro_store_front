@@ -1,8 +1,42 @@
 import styled from "styled-components";
 import BuyingItem from "./BuyingItem";
+import axios from "axios";
+import { useState, useEffect, useContext } from "react";
+
 
 
 export default function Cart() {
+    
+    const [ items, setItems ] = useState([]);
+    const [ total, setTotal ] = useState(0);
+
+useEffect( async () => {
+    let request = await axios.get("http://localhost:4000/buy");
+    setItems(request.data);
+}, []);
+
+useEffect( async () => {
+    let request = await axios.get("http://localhost:4000/buyingvalue");
+    setTotal(request.data.price);
+    
+ }, []);
+    
+
+    function RenderBuyingItems () {
+        let renderItems = items.map((object, index) => <BuyingItem key={index} UpdateBuyingItems={UpdateBuyingItems} UpdateTotal= {UpdateTotal} quantity={object.quantity} name={object.name} image={object.image} price={object.price} />);
+
+        return(renderItems);
+    }
+    async function UpdateBuyingItems () {
+        let request = await axios.get("http://localhost:4000/buy");
+        setItems(request.data);
+        ;
+    }
+
+   async function UpdateTotal () {
+        let request = await axios.get("http://localhost:4000/buyingvalue");
+        setTotal(request.data.price);
+    }
     return(
         <Page>
         <Top>
@@ -19,14 +53,15 @@ export default function Cart() {
         <span>My Cart</span>
         <ShopCart>
             <Items>
-                <BuyingItem />
+                {items === [] ? <span>Ainda não há items no carrinho!</span> : <RenderBuyingItems />}
+                
                 
             </Items>
             <Bill>
                 <Total>
                     <div>
                         <span>Total</span>
-                        <span>R$6.000,00</span>
+                        <span>R${total}</span>
                     </div>
                     <div>
                         <span>Frete</span>
@@ -119,6 +154,7 @@ const ShopCart = styled.div`
     border-top-right-radius: 40px;
     color: #FFFFFF;
     font-family: 'Mark Pro', sans-serif;
+    overflow-y: scroll;
 `;
 
 const Items = styled.div`
@@ -126,6 +162,12 @@ const Items = styled.div`
     padding-top: 50px;
     padding-left: 30px;
     padding-right: 30px;
+    > span {
+        color: #FFFFFF;
+        font-family: 'Mark Pro', sans-serif;
+        font-weight: bold;
+        font-size: 20px;
+    }
 `;
 
 const Bill = styled.div`
